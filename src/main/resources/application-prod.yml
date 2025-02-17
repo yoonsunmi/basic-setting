@@ -1,0 +1,80 @@
+logging:
+  config: classpath:config/logback/logback-prod.xml
+
+spring:
+  jpa:
+    database-platform: com.hellofintech.hellofunding.configuration.database.MysqlDialect
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  lifecycle:
+    timeout-per-shutdown-phase: "20s"
+  codec:
+    max-in-memory-size: 10485760
+    
+  mvc:
+    favicon:
+      enabled: false
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  messages:
+    basename: message/messages,message/errors
+
+  master:
+    datasource:
+      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mysql://10.22.162.29/crowdfundXX?serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+      username: crowdfundXX
+      password: crowdfundXX^!@#$
+      maximum-pool-size: 40
+      max-lifetime: 1800000
+      auto-commit: true
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+  info:
+    datasource:
+      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mysql://10.22.162.25/crowdfundYY?serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+      username: crowdfundYY
+      password: crowdfundYY^!@#$
+      maximum-pool-size: 40
+      max-lifetime: 1800000
+      auto-commit: true
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      FAIL_ON_IGNORED_PROPERTIES: false
+
+  redis:
+    host: hello-redis-ha-haproxy.redis-ns
+    port: 6379
+
+server:
+  tomcat:
+    threads:
+      max: 1000 # 생성할 수 있는 thread의 총 개수
+      min-spare: 100 # 항상 활성화 되어있는(idle) thread의 개수
+    max-connections: 8192 # 수립가능한 connection의 총 개수
+    accept-count: 200 # 작업큐의 사이즈
+    connection-timeout: 180000 # timeout 판단 기준 시간, 20초
+  shutdown: graceful # graceful shutdown 설정
+  port: 8010
+  error:
+    include-exception: true # 오류 응답에 exception의 내용을 포함할지 여부
+    include-stacktrace: always # 오류 응답에 stacktrace 내용을 포함할 지 여부

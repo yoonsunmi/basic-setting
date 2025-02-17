@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.22.164.33/crowdfundXXdev?serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+    username: crowdfundXX
+    password: crowdfundXX^!@#$
+    maximum-pool-size: 5
+    max-lifetime: 1800000
+    auto-commit: true
+    data-source-properties:
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+      useServerPrepStmts: true
+
+server:
+  port: 8010

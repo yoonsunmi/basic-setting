@@ -1,0 +1,6 @@
+@Library('hellofunding-jenkins-lib@main') _
+
+hellofundingPipeline(
+    buildPhase: "dev",
+    ncrRepo: "41e7fca7-kr1-registry.container.nhncloud.com/hello-app-registry"
+)

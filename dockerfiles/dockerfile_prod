@@ -1,0 +1,9 @@
+FROM 41e7fca7-kr1-registry.container.nhncloud.com/hello-app-registry/hello-app-default-os:latest
+WORKDIR /home/crowdfund
+USER crowdfund
+ARG JAR_FILE_PATH=./build/libs/*-SNAPSHOT.jar
+COPY ${JAR_FILE_PATH} app.jar
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD java -Duser.timezone=Asia/Seoul \
+        -Dspring.profiles.active=prod \
+        -jar app.jar
